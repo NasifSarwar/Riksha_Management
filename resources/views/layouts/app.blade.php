@@ -16,10 +16,10 @@
     </head>
     <body class="font-sans antialiased">
 
-        <div class="language-switcher" style="position: absolute; top: 10px; right: 20px;">
+        {{-- <div class="language-switcher" style="position: absolute; top: 10px; right: 20px;">
             <a href="{{ route('changeLang', 'en') }}">English</a> | 
             <a href="{{ route('changeLang', 'bn') }}">বাংলা</a>
-        </div>
+        </div> --}}
         <div class="min-h-screen bg-gray-100">
             @include('layouts.navigation')
 
