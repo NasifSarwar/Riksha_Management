@@ -10,10 +10,10 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-Route::get('/change-language/{lang}', function ($lang) {
-    session(['app_locale' => $lang]);
-    return redirect()->back();
-})->name('changeLang');
+// Route::get('/change-language/{lang}', function ($lang) {
+//     session(['app_locale' => $lang]);
+//     return redirect()->back();
+// })->name('changeLang');
 
 
 Route::middleware('auth')->group(function () {

@@ -1,92 +1,108 @@
-<x-guest-layout>
-    <form method="POST" action="{{ route('register') }}">
-        @csrf
+<!DOCTYPE html>
+<html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Register | Riksha Management System</title>
 
-        <!-- Name -->
-        <div>
-            <x-input-label for="name" :value="__('Name')" />
-            <x-text-input id="name" class="block mt-1 w-full" type="text" name="name" :value="old('name')" required autofocus autocomplete="name" />
-            <x-input-error :messages="$errors->get('name')" class="mt-2" />
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.bunny.net">
+    <link href="https://fonts.bunny.net/css?family=instrument-sans:400,500,600" rel="stylesheet" />
+
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="{{ asset('css/register.css') }}">
+</head>
+<body class="bg-image">
+    <div class="bg-overlay">
+        <div class="auth-container">
+            <h2>Create an Account</h2>
+
+            <form method="POST" action="{{ route('register') }}">
+                @csrf
+
+                <!-- Name -->
+                <div class="input-group">
+                    <label for="name">Full Name</label>
+                    <input id="name" type="text" name="name" value="{{ old('name') }}" required autofocus>
+                    <x-input-error :messages="$errors->get('name')" />
+                </div>
+
+                <!-- Email -->
+                <div class="input-group">
+                    <label for="email">Email</label>
+                    <input id="email" type="email" name="email" value="{{ old('email') }}" required>
+                    <x-input-error :messages="$errors->get('email')" />
+                </div>
+
+                <!-- Phone Number -->
+                <div class="input-group">
+                    <label for="phone_number">Phone Number</label>
+                    <input id="phone_number" type="text" name="phone_number" value="{{ old('phone_number') }}" required>
+                    <x-input-error :messages="$errors->get('phone_number')" />
+                </div>
+
+                <!-- NID Number -->
+                <div class="input-group">
+                    <label for="nid_number">NID Number</label>
+                    <input id="nid_number" type="text" name="nid_number" value="{{ old('nid_number') }}" required>
+                    <x-input-error :messages="$errors->get('nid_number')" />
+                </div>
+
+                <!-- Division -->
+                <div class="input-group">
+                    <label for="division">Division</label>
+                    <input id="division" type="text" name="division" value="{{ old('division') }}" required>
+                    <x-input-error :messages="$errors->get('division')" />
+                </div>
+
+                <!-- District -->
+                <div class="input-group">
+                    <label for="district">District</label>
+                    <input id="district" type="text" name="district" value="{{ old('district') }}" required>
+                    <x-input-error :messages="$errors->get('district')" />
+                </div>
+
+                <!-- Full Address -->
+                <div class="input-group">
+                    <label for="full_address">Full Address</label>
+                    <input id="full_address" type="text" name="full_address" value="{{ old('full_address') }}" required>
+                    <x-input-error :messages="$errors->get('full_address')" />
+                </div>
+
+                <!-- Register As (Role Selection) -->
+                <div class="input-group">
+                    <label for="role">Register As</label>
+                    <select name="role" required>
+                        <option value="owner">Owner</option>
+                        <option value="puller">Riksha Puller</option>
+                    </select>
+                    <x-input-error :messages="$errors->get('role')" />
+                </div>
+
+                <!-- Password -->
+                <div class="input-group">
+                    <label for="password">Password</label>
+                    <input id="password" type="password" name="password" required>
+                    <x-input-error :messages="$errors->get('password')" />
+                </div>
+
+                <!-- Confirm Password -->
+                <div class="input-group">
+                    <label for="password_confirmation">Confirm Password</label>
+                    <input id="password_confirmation" type="password" name="password_confirmation" required>
+                    <x-input-error :messages="$errors->get('password_confirmation')" />
+                </div>
+
+                <!-- Buttons -->
+                <div class="button-group">
+                    <a href="{{ route('login') }}" class="forgot-password">Already registered?</a>
+                    <button type="submit" class="btn btn-primary">Register</button>
+                </div>
+            </form>
         </div>
+    </div>
 
-        <!-- Email Address -->
-        <div class="mt-4">
-            <x-input-label for="email" :value="__('Email')" />
-            <x-text-input id="email" class="block mt-1 w-full" type="email" name="email" :value="old('email')" required autocomplete="username" />
-            <x-input-error :messages="$errors->get('email')" class="mt-2" />
-        </div>
-
-        <!-- Phone Number -->
-        <div class="mt-4">
-            <x-input-label for="phone_number" :value="__('Phone Number')" />
-            <x-text-input id="phone_number" class="block mt-1 w-full" type="text" name="phone_number" :value="old('phone_number')" required />
-            <x-input-error :messages="$errors->get('phone_number')" class="mt-2" />
-        </div>
-
-        <!-- NID Number -->
-        <div class="mt-4">
-            <x-input-label for="nid_number" :value="__('NID Number')" />
-            <x-text-input id="nid_number" class="block mt-1 w-full" type="text" name="nid_number" :value="old('nid_number')" required />
-            <x-input-error :messages="$errors->get('nid_number')" class="mt-2" />
-        </div>
-
-        <!-- Division -->
-        <div class="mt-4">
-            <x-input-label for="division" :value="__('Division')" />
-            <x-text-input id="division" class="block mt-1 w-full" type="text" name="division" :value="old('division')" required />
-            <x-input-error :messages="$errors->get('division')" class="mt-2" />
-        </div>
-
-        <!-- District -->
-        <div class="mt-4">
-            <x-input-label for="district" :value="__('District')" />
-            <x-text-input id="district" class="block mt-1 w-full" type="text" name="district" :value="old('district')" required />
-            <x-input-error :messages="$errors->get('district')" class="mt-2" />
-        </div>
-
-        <!-- Full Address -->
-        <div class="mt-4">
-            <x-input-label for="full_address" :value="__('Full Address')" />
-            <x-text-input id="full_address" class="block mt-1 w-full" type="text" name="full_address" :value="old('full_address')" required />
-            <x-input-error :messages="$errors->get('full_address')" class="mt-2" />
-        </div>
-
-        <!-- Register As (Role Selection) -->
-        <div class="mb-3">
-            <x-input-label for="role" :value="__('Register As')" />
-            <select class="form-control" name="role" required>
-                <option value="owner">Owner</option>
-                <option value="puller">Riksha Puller</option>
-            </select>
-        </div>
-
-        <!-- Password -->
-        <div class="mt-4">
-            <x-input-label for="password" :value="__('Password')" />
-            <x-text-input id="password" class="block mt-1 w-full"
-                            type="password"
-                            name="password"
-                            required autocomplete="new-password" />
-            <x-input-error :messages="$errors->get('password')" class="mt-2" />
-        </div>
-
-        <!-- Confirm Password -->
-        <div class="mt-4">
-            <x-input-label for="password_confirmation" :value="__('Confirm Password')" />
-            <x-text-input id="password_confirmation" class="block mt-1 w-full"
-                            type="password"
-                            name="password_confirmation" required autocomplete="new-password" />
-            <x-input-error :messages="$errors->get('password_confirmation')" class="mt-2" />
-        </div>
-
-        <div class="flex items-center justify-end mt-4">
-            <a class="underline text-sm text-gray-600 hover:text-gray-900 rounded-md focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500" href="{{ route('login') }}">
-                {{ __('Already registered?') }}
-            </a>
-
-            <x-primary-button class="ms-4">
-                {{ __('Register') }}
-            </x-primary-button>
-        </div>
-    </form>
-</x-guest-layout>
+    <!-- JavaScript -->
+    <script src="{{ asset('js/register.js') }}"></script>
+</body>
+</html>
