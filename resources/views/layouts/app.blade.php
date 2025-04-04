@@ -11,15 +11,18 @@
         <link rel="preconnect" href="https://fonts.bunny.net">
         <link href="https://fonts.bunny.net/css?family=figtree:400,500,600&display=swap" rel="stylesheet" />
 
+        <link rel="stylesheet" href="{{ asset('css/table.css') }}">
+        
         <!-- Scripts -->
         @vite(['resources/css/app.css', 'resources/js/app.js'])
     </head>
     <body class="font-sans antialiased">
 
-        <div class="language-switcher" style="position: absolute; top: 10px; right: 20px;">
+        {{-- <div class="language-switcher" style="position: absolute; top: 10px; right: 20px;">
             <a href="{{ route('changeLang', 'en') }}">English</a> | 
             <a href="{{ route('changeLang', 'bn') }}">বাংলা</a>
-        </div>
+        </div> --}}
+
         <div class="min-h-screen bg-gray-100">
             @include('layouts.navigation')
 
@@ -36,6 +39,12 @@
             <main>
                 {{ $slot }}
             </main>
+
+             <!-- Footer -->
+        <footer class="bg-gray-800 text-white text-center p-4 mt-4">
+            &copy; {{ date('Y') }} Riksha Management System. All rights reserved.
+        </footer>
+
         </div>
     </body>
 </html>
