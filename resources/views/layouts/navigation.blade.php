@@ -11,25 +11,47 @@
                 </div>
 
                 <!-- Navigation Links -->
-                {{-- Dashboard link --}}
-                <div class="hidden space-x-8 sm:-my-px sm:ms-10 sm:flex">
-                    <x-nav-link :href="route('dashboard')" :active="request()->routeIs('dashboard')">
-                        {{ __('Dashboard') }}
-                    </x-nav-link>
-                </div>
-                    {{-- Register Puller  --}}
-                <div class="hidden space-x-8 sm:-my-px sm:ms-10 sm:flex">
-                    <x-nav-link :href="route('dashboard')" :active="request()->routeIs('dashboard')">
-                        {{ __('Register Puller') }}
-                    </x-nav-link>
-                </div>
+ <!-- Navigation Links -->
+{{-- Dashboard Link (common for all) --}}
+<div class="hidden space-x-8 sm:-my-px sm:ms-10 sm:flex">
+    <x-nav-link :href="route('dashboard')" :active="request()->routeIs('dashboard')">
+        {{ __('Dashboard') }}
+    </x-nav-link>
+</div>
 
-                <div class="hidden space-x-8 sm:-my-px sm:ms-10 sm:flex">
-                    <x-nav-link :href="route('dashboard')" :active="request()->routeIs('dashboard')">
-                        {{ __('Register Riksha') }}
-                    </x-nav-link>
-                </div>
+@auth
+    {{-- Owner-specific links --}}
+    @if(auth()->user()->role === 'owner')
+        {{-- Register Puller --}}
+        <div class="hidden space-x-8 sm:-my-px sm:ms-10 sm:flex">
+            <x-nav-link :href="route('owner.register-puller.create')" :active="request()->routeIs('owner.register-puller.create')">
+                {{ __('Register Puller') }}
+            </x-nav-link>
+        </div>
 
+        {{-- Register Riksha --}}
+        <div class="hidden space-x-8 sm:-my-px sm:ms-10 sm:flex">
+            <x-nav-link :href="route('dashboard')" :active="request()->routeIs('dashboard')">
+                {{ __('Register Riksha') }}
+            </x-nav-link>
+        </div>
+    @endif
+
+    {{-- Admin-specific links --}}
+    @if(auth()->user()->role === 'admin')
+        <div class="hidden space-x-8 sm:-my-px sm:ms-10 sm:flex">
+            <x-nav-link :href="route('admin.approve-pullers')" :active="request()->routeIs('admin.approve-pullers')">
+                {{ __('Approve Pullers') }}
+            </x-nav-link>
+        </div>
+
+        <div class="hidden space-x-8 sm:-my-px sm:ms-10 sm:flex">
+            <x-nav-link :href="route('dashboard')" :active="request()->routeIs('dashboard')">
+                {{ __('Approve Rikshas') }}
+            </x-nav-link>
+        </div>
+    @endif
+@endauth
             <!-- Settings Dropdown -->
             <div class="hidden sm:flex sm:items-center sm:ms-6">
                 <x-dropdown align="right" width="48">

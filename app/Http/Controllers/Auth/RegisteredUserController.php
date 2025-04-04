@@ -53,6 +53,8 @@ class RegisteredUserController extends Controller
             'full_address' => $request->full_address,  // Store full address
             'role' => $request->role,  // Store role
             'password' => Hash::make($request->password),  // Hash and store the password
+            'is_approved' => true, // 👈 APPROVE only for self-registered users
+            'registered_by' => null, // 👈 because it's self-registration
         ]);
 
         // Fire the Registered event

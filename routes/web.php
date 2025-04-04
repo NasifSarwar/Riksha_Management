@@ -5,6 +5,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Middleware\RoleMiddleware;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\DashboardController;
+use App\Http\Controllers\OwnerPullerController;
 
 Route::get('/', function () {
     return view('welcome');
@@ -50,6 +51,24 @@ Route::middleware('auth')->group(function () {
         ->name('puller.dashboard')
         ->middleware('role:puller');
 });
+
+// owner registering puller 
+Route::middleware(['auth', 'owner'])->group(function () {
+    Route::get('/owner/register-puller', [OwnerPullerController::class, 'create'])->name('owner.register-puller.create');
+    Route::post('/owner/register-puller', [OwnerPullerController::class, 'store'])->name('owner.register-puller.store');
+});
+
+// Admin Approving Puller 
+
+use App\Http\Controllers\AdminApprovalController;
+
+Route::middleware(['auth', 'role:admin'])->group(function () {
+    Route::get('/admin/approve-pullers', [AdminApprovalController::class, 'showPendingPullers'])->name('admin.approve-pullers');
+    Route::post('/admin/approve-puller/{id}', [AdminApprovalController::class, 'approve'])->name('admin.approve-puller');
+    Route::post('/admin/disapprove-puller/{id}', [AdminApprovalController::class, 'disapprove'])->name('admin.disapprove-puller');
+});
+
+
 
 
 require __DIR__.'/auth.php';
