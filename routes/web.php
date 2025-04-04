@@ -3,8 +3,12 @@
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 use App\Http\Middleware\RoleMiddleware;
+use App\Http\Controllers\RikshaController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\DashboardController;
+use App\Http\Controllers\OwnerPullerController;
+use App\Http\Controllers\AdminApprovalController;
+use App\Http\Controllers\AdminRikshaApprovalController;
 
 Route::get('/', function () {
     return view('welcome');
@@ -50,6 +54,37 @@ Route::middleware('auth')->group(function () {
         ->name('puller.dashboard')
         ->middleware('role:puller');
 });
+
+// owner registering puller 
+Route::middleware(['auth', 'owner'])->group(function () {
+    Route::get('/owner/register-puller', [OwnerPullerController::class, 'create'])->name('owner.register-puller.create');
+    Route::post('/owner/register-puller', [OwnerPullerController::class, 'store'])->name('owner.register-puller.store');
+});
+
+// Owner registering riksha
+Route::middleware(['auth', 'owner'])->group(function () {
+    Route::get('/owner/register-riksha', [RikshaController::class, 'create'])->name('owner.register-riksha.create');
+    Route::post('/owner/register-riksha', [RikshaController::class, 'store'])->name('owner.register-riksha.store');
+});
+
+
+// Admin Approving Puller 
+
+Route::middleware(['auth', 'role:admin'])->group(function () {
+    Route::get('/admin/approve-pullers', [AdminApprovalController::class, 'showPendingPullers'])->name('admin.approve-pullers');
+    Route::post('/admin/approve-puller/{id}', [AdminApprovalController::class, 'approve'])->name('admin.approve-puller');
+    Route::post('/admin/disapprove-puller/{id}', [AdminApprovalController::class, 'disapprove'])->name('admin.disapprove-puller');
+});
+
+// Admin Approve Riksha Routes
+Route::middleware(['auth', 'role:admin'])->group(function () {
+    Route::get('/admin/approve-rikshas', [AdminRikshaApprovalController::class, 'showPendingRikshas'])->name('admin.approve-rikshas');
+    Route::post('/admin/approve-riksha/{id}', [AdminRikshaApprovalController::class, 'approve'])->name('admin.approve-riksha');
+    Route::post('/admin/disapprove-riksha/{id}', [AdminRikshaApprovalController::class, 'disapprove'])->name('admin.disapprove-riksha');
+});
+
+
+
 
 
 require __DIR__.'/auth.php';
