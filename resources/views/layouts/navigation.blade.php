@@ -31,7 +31,7 @@
 
         {{-- Register Riksha --}}
         <div class="hidden space-x-8 sm:-my-px sm:ms-10 sm:flex">
-            <x-nav-link :href="route('dashboard')" :active="request()->routeIs('dashboard')">
+            <x-nav-link :href="route('owner.register-riksha.create')" :active="request()->routeIs('owner.register-riksha.create')">
                 {{ __('Register Riksha') }}
             </x-nav-link>
         </div>
@@ -46,7 +46,7 @@
         </div>
 
         <div class="hidden space-x-8 sm:-my-px sm:ms-10 sm:flex">
-            <x-nav-link :href="route('dashboard')" :active="request()->routeIs('dashboard')">
+            <x-nav-link :href="route('admin.approve-rikshas')" :active="request()->routeIs('admin.approve-rikshas')">
                 {{ __('Approve Rikshas') }}
             </x-nav-link>
         </div>
