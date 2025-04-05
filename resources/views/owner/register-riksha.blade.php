@@ -24,6 +24,7 @@
                                             <th class="px-4 py-2 text-left text-gray-700">District</th>
                                             <th class="px-4 py-2 text-left text-gray-700">Police Station</th>
                                             <th class="px-4 py-2 text-left text-gray-700">Status</th>
+                                            <th class="px-4 py-2 text-left text-gray-700">QR Code</th>
                                         </tr>
                                     </thead>
                                     <tbody>
@@ -41,6 +42,16 @@
                                                         <span class="text-green-600">Approved</span>
                                                     @else
                                                         <span class="text-red-600">Disapproved</span>
+                                                    @endif
+                                                </td>
+                                                <td class="px-4 py-2">
+                                                    @if ($riksha->is_approved && $riksha->qr_code)
+                                                        <div>
+                                                            <img src="{{ asset($riksha->qr_code) }}" alt="QR Code" class="w-20 h-20">
+                                                            <a href="{{ asset($riksha->qr_code) }}" download="{{ $riksha->qr_code }}" class="text-blue-600 hover:underline mt-2 block">Download QR Code</a>
+                                                        </div>
+                                                    @else
+                                                        <span class="text-gray-500">No QR Code</span>
                                                     @endif
                                                 </td>
                                             </tr>

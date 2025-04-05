@@ -9,6 +9,7 @@ use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\OwnerPullerController;
 use App\Http\Controllers\AssignRikshaController;
 use App\Http\Controllers\AdminApprovalController;
+use App\Http\Controllers\RikshaPublicViewController;
 use App\Http\Controllers\AdminRikshaApprovalController;
 
 Route::get('/', function () {
@@ -95,6 +96,9 @@ Route::middleware(['auth', 'owner'])->group(function () {
     // Unassign Puller from a Riksha
     Route::post('owner/unassign-puller/{riksha}', [AssignRikshaController::class, 'unassignPuller'])->name('owner.riksha.unassign-puller');
 });
+
+Route::get('/riksha/view/{id}', [RikshaPublicViewController::class, 'show'])->name('riksha.public.view');
+
 
 
 
