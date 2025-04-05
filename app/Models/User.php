@@ -44,4 +44,9 @@ class User extends Authenticatable
             'password' => 'hashed',
         ];
     }
+
+    public function rikshas()
+    {
+        return $this->hasMany(Riksha::class, 'puller_id');
+    }
 }

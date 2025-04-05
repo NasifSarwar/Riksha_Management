@@ -36,6 +36,7 @@ class RikshaController extends Controller
             'police_station' => $request->police_station,
             'purchase_date' => $request->purchase_date,
             'is_approved' => null, // default: pending
+            'status' => 'inactive',
         ]);
 
         return redirect()->back()->with('success', 'Riksha registration request submitted successfully!');

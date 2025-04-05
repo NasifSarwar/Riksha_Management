@@ -11,15 +11,15 @@
             <div class="squares-container">
                 <div class="square">
                     <div class="title">Number of Rikshas</div>
-                    <div class="value">10</div>
+                    <div class="value">{{ $totalRikshas }}</div>
                 </div>
                 <div class="square">
                     <div class="title">Number of Pullers</div>
-                    <div class="value">15</div>
+                    <div class="value">{{ $totalPullers }}</div>
                 </div>
                 <div class="square">
                     <div class="title">Rikshas Online</div>
-                    <div class="value">8</div>
+                    <div class="value">{{ $rikshasOnline }}</div>
                 </div>
                 <div class="square">
                     <div class="title">Number of Cases</div>
@@ -43,32 +43,17 @@
                         </tr>
                     </thead>
                     <tbody>
-                        <tr>
-                            <td>R001</td>
-                            <td>P101</td>
-                            <td>Rahim</td>
-                            <td>2025-04-02</td>
-                            <td>10:00 AM</td>
-                            <td>2h 30m</td>
-                        </tr>
-                        <tr>
-                            <td>R002</td>
-                            <td>P102</td>
-                            <td>Karim</td>
-                            <td>2025-04-02</td>
-                            <td>11:15 AM</td>
-                            <td>1h 45m</td>
-                        </tr>
-                        <tr>
-                            <td>R003</td>
-                            <td>P103</td>
-                            <td>Abdul</td>
-                            <td>2025-04-02</td>
-                            <td>09:45 AM</td>
-                            <td>3h 10m</td>
-                        </tr>
-                    </tbody>
-                </table>
+                        @foreach($rikshas as $riksha)
+                            <tr>
+                                <td>{{ $riksha->riksha_id }}</td>
+                                <td>{{ $riksha->puller_id }}</td>
+                                <td>{{ $riksha->puller_name }}</td>
+                                <td>{{ $riksha->date_online }}</td>
+                                <td>{{ $riksha->time_online }}</td>
+                                <td>{{ $riksha->duration }}</td>
+                            </tr>
+                        @endforeach
+                    </tbody>                </table>
             </div>
         </div>
     </div>

@@ -35,6 +35,12 @@
                 {{ __('Register Riksha') }}
             </x-nav-link>
         </div>
+                {{-- Riksha Assignment --}}
+        <div class="hidden space-x-8 sm:-my-px sm:ms-10 sm:flex">
+            <x-nav-link :href="route('owner.manage-rikshas')" :active="request()->routeIs('owner.manage-rikshas')">
+                {{ __('Assign Riksha') }}
+            </x-nav-link>
+        </div>
     @endif
 
     {{-- Admin-specific links --}}

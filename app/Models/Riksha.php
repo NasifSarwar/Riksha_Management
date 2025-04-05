@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Carbon\Carbon;
 
 class Riksha extends Model
 {
@@ -19,11 +20,23 @@ class Riksha extends Model
         'police_station',
         'is_approved',
         'qr_code',
+        'puller_id',
+        'assigned_at',
+        'status',
+    ];
+
+    protected $casts = [
+        'assigned_at' => 'datetime',
     ];
 
     public function owner()
     {
         return $this->belongsTo(User::class, 'buyer_id');
+    }
+
+    public function puller()
+    {
+    return $this->belongsTo(User::class, 'puller_id');
     }
 }
 
