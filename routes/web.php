@@ -7,6 +7,7 @@ use App\Http\Controllers\RikshaController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\OwnerPullerController;
+use App\Http\Controllers\AssignRikshaController;
 use App\Http\Controllers\AdminApprovalController;
 use App\Http\Controllers\AdminRikshaApprovalController;
 
@@ -83,6 +84,17 @@ Route::middleware(['auth', 'role:admin'])->group(function () {
     Route::post('/admin/disapprove-riksha/{id}', [AdminRikshaApprovalController::class, 'disapprove'])->name('admin.disapprove-riksha');
 });
 
+// Riksha assignment to puller
+Route::middleware(['auth', 'owner'])->group(function () {
+    // Manage Rikshas page
+    Route::get('owner/manage-rikshas', [AssignRikshaController::class, 'index'])->name('owner.manage-rikshas');
+
+    // Assign Puller to a Riksha
+    Route::post('owner/assign-puller/{riksha}', [AssignRikshaController::class, 'assignPuller'])->name('owner.riksha.assign-puller');
+
+    // Unassign Puller from a Riksha
+    Route::post('owner/unassign-puller/{riksha}', [AssignRikshaController::class, 'unassignPuller'])->name('owner.riksha.unassign-puller');
+});
 
 
 
