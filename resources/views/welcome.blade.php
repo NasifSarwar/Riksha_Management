@@ -38,7 +38,7 @@
     </div>
 
     <!-- JavaScript -->
-    <script src="{{ asset('js/welcome.js') }}"></script>
+    {{-- <script src="{{ asset('js/welcome.js') }}"></script> --}}
 
 </body>
 </html>
